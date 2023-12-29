@@ -64,6 +64,40 @@ async function run() {
       res.send(result)
 
   })
+  app.patch('/tasks/completed/:id', async(req, res)=>{
+    const id = req.params.id
+    const filter = {_id: new ObjectId(id)}
+    const updatedDoc = {
+      $set: {
+        status: "completed"
+      }
+    }
+    const result = await taskCollection.updateOne(filter, updatedDoc)
+    res.send(result)
+  })
+  app.patch('/tasks/ongoing/:id', async(req, res)=>{
+    const id = req.params.id
+    const filter = {_id: new ObjectId(id)}
+    const updatedDoc = {
+      $set: {
+        status: "ongoing"
+      }
+    }
+    const result = await taskCollection.updateOne(filter, updatedDoc)
+    res.send(result)
+  })
+  app.patch('/tasks/todo/:id', async(req, res)=>{
+    const id = req.params.id
+    const filter = {_id: new ObjectId(id)}
+    const updatedDoc = {
+      $set: {
+        status: "todo"
+      }
+    }
+    const result = await taskCollection.updateOne(filter, updatedDoc)
+    res.send(result)
+  })
+
     app.delete('/tasks/:id', async(req, res)=>{
       const id = req.params.id
       const query = {_id: new ObjectId(id)}
